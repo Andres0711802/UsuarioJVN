@@ -1,0 +1,85 @@
+<br/><br/>
+<div class="container">
+
+    
+<button class="btn btn-primary create-user"  [routerLink]="['/registrar'] " >Crear Usuario</button>
+<br/><br/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Otros Nombres</th>
+            <th scope="col">Pais</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listaUsuarios">
+            <td>
+                {{item.id}}
+            </td>
+            <td>
+                {{item.primerNombre}}
+            </td>
+            <td>
+                {{item.primerApellido}}
+            </td>
+            <td>
+                {{item.otrosNombres}}
+            </td>
+            <td>
+                {{item.paisEmpleo}}
+            </td>
+            <td>
+                {{item.correo}}
+            </td>
+            <td>
+                <button class="btn btn-primary" [routerLink]="['/',item.id] " routerLinkActive="router-link-active ">Detalle</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" (click)="eliminar(item.id)">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li *ngIf="page.number == 0" class="page-item disabled">
+            <a (click)="getPrimeraPagina();" class="page-link">Primero</a>
+        </li>
+        <li *ngIf="page.number >0" class="page-item ">
+            <a (click)="getPrimeraPagina();" class="page-link">Primero</a>
+        </li>
+        <li *ngIf="page.number == 0" class="page-item disabled">
+            <a (click)="previous();" class="page-link">Anterior</a>
+        </li>
+        <li *ngIf="page.number >0" class="page-item ">
+            <a (click)="previous();" class="page-link">Anterior</a>
+        </li>
+
+        <li *ngFor="let paginas of cantidad;  index as i;" #paginas [id]="paginas" class="page-item">
+            <a class="page-link  " (click)="numeroPaginador(paginas)">{{paginas}}</a>
+        </li>
+        <li *ngIf="estadoNextdeshabilitado" class="page-item disabled">
+            <a (click)="setNext();" class="page-link">Siguiente</a>
+        </li>
+        <li *ngIf="!estadoNextdeshabilitado" class="page-item ">
+            <a (click)="setNext();" class="page-link">Siguiente</a>
+        </li>
+        <li *ngIf="estadoNextdeshabilitado" class="page-item disabled">
+            <a (click)="getUltimaPagina();" class="page-link">Último</a>
+        </li>
+        <li *ngIf="!estadoNextdeshabilitado" class="page-item ">
+            <a (click)="getUltimaPagina();" class="page-link">Último</a>
+        </li>
+
+    </ul>
+</nav>
+
+
+</div>
